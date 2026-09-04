@@ -1,13 +1,77 @@
 # Unfetch Agent Plugin
 
-This plugin connects compatible AI agents to Unfetch's marketing reporting tools. Reporting cannot change connected advertising or analytics accounts. Personal memory tools can save or delete your private reporting preferences. Install it from your client's marketplace or local plugin flow, complete OAuth when prompted, and choose a brand from the accessible brand list.
+Connect your AI assistant to your marketing data and turn live account evidence into clear, actionable reports.
 
-Clients without Agent Plugin support can connect directly with the Streamable HTTP endpoint shown on the Unfetch MCP setup page. The direct server and this plugin use the same reporting skill instructions.
+Unfetch supports:
 
-The package contains no credentials or brand identifiers. Access follows your current Unfetch team membership and brand assignments and can be revoked from https://unfetch.com/mcp.
+- Google Ads campaign, keyword, search-term, conversion, budget, and performance reporting
+- Google Analytics traffic and conversion reporting
+- Google Search Console query and landing-page reporting
+- Keyword research, including demand, competition, CPC, and bid estimates
+- Web research for current public-page and landing-page evidence
+- Follow-up analysis across report results
+- Private memories for reporting preferences and business context
 
-## Package structure
+Reporting access is read-only for connected advertising and analytics accounts. The plugin cannot change campaigns, budgets, bids, ads, analytics properties, or Search Console data. Personal memory tools can save or delete private reporting preferences in your Unfetch account.
 
-The reporting instructions have one source at `skills/marketing-reporting/SKILL.md`. The root Agent Plugins manifest and the Claude and OpenAI manifests are generated from shared metadata, including the MCP URL, with `npm run generate:agent-plugin`.
+## Before you install
 
-Claude Code reads `.claude-plugin/plugin.json` and `.mcp.json`. Codex reads `.codex-plugin/plugin.json` and `.mcp.json`. For an OpenAI public submission, submit the same reporting skill and the production MCP endpoint together through the **With MCP** flow; the portal registers the endpoint separately from this local package configuration.
+1. [Sign in to Unfetch](https://unfetch.com/login).
+2. Create or select a brand, then open **Integrations** in that brand's navigation to connect its data sources. [Create a brand](https://unfetch.com/add-brand) if you do not have one yet.
+3. Confirm that your [team membership and brand access](https://unfetch.com/team) include every brand you want the assistant to use.
+
+OAuth opens automatically when a supported client connects. Access always follows your current Unfetch team membership and brand assignments.
+
+## Install in Claude Code
+
+Run these commands inside Claude Code:
+
+```text
+/plugin marketplace add unfetch-com/agent-plugin
+/plugin install unfetch@unfetch-plugins
+```
+
+Restart Claude Code or run `/reload-plugins` if the plugin is not available immediately.
+
+## Install in Codex
+
+Run:
+
+```sh
+codex plugin marketplace add https://github.com/unfetch-com/agent-plugin
+codex plugin add unfetch@unfetch-plugins
+```
+
+Start a new Codex session after installation if the plugin is not available in the current session.
+
+## Install in Gemini CLI
+
+Run:
+
+```sh
+gemini extensions install https://github.com/unfetch-com/agent-plugin
+```
+
+Restart Gemini CLI after installation if the extension is not available in the current session.
+
+## Install in VS Code with GitHub Copilot
+
+1. Open the Command Palette.
+2. Run **Chat: Install Plugin From Source**.
+3. Enter `https://github.com/unfetch-com/agent-plugin`.
+4. Review the source and confirm the installation.
+
+You can also open **Chat: Open Customizations**, select **Plugins**, and choose **Install Plugin from Source**.
+
+## ChatGPT and other MCP clients
+
+Use the guided instructions on the [Unfetch MCP setup page](https://unfetch.com/mcp). It provides the production Streamable HTTP connection and handles OAuth without API keys or credentials in this repository.
+
+## Access and privacy
+
+- Manage or revoke connected AI clients from [MCP settings](https://unfetch.com/mcp).
+- Manage members and brand access from [Team settings](https://unfetch.com/team).
+- Manage data-source connections from **Integrations** inside each brand.
+- Review the [privacy policy](https://unfetch.com/about/privacy) and [terms of service](https://unfetch.com/about/terms-of-service).
+
+This public repository contains no account credentials, access tokens, customer data, or brand identifiers.

@@ -1,0 +1,20 @@
+{
+	"name": "unfetch-plugins",
+	"interface": {
+		"displayName": "Unfetch Plugins"
+	},
+	"plugins": [
+		{
+			"name": "unfetch",
+			"source": {
+				"source": "local",
+				"path": "./agent-plugin/unfetch"
+			},
+			"policy": {
+				"installation": "AVAILABLE",
+				"authentication": "ON_INSTALL"
+			},
+			"category": "Productivity"
+		}
+	]
+}
