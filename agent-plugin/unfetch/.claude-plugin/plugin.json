@@ -2,7 +2,7 @@
 	"$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
 	"name": "unfetch",
 	"displayName": "Unfetch",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Marketing reporting for connected brands, with private memory for saved preferences.",
 	"author": {
 		"name": "Unfetch",

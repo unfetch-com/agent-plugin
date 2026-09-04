@@ -7,6 +7,18 @@ description: Create reliable, evidence-led marketing reports with Unfetch and re
 
 Use this skill for marketing performance questions, audits, comparisons, and follow-up analysis of existing report results.
 
+## Connect Unfetch
+
+- Before starting a report, check whether the Unfetch reporting tools are available in the current session. Do not call a tool only to test whether it exists.
+- If the tools are available, continue with the user's request.
+- If the tools are unavailable, stop and explain that Unfetch must be connected. Give only the setup path relevant to the user's client:
+  - **Claude Code:** run `/plugin marketplace add unfetch-com/agent-plugin`, then `/plugin install unfetch@unfetch-plugins`.
+  - **Codex:** run `codex plugin marketplace add https://github.com/unfetch-com/agent-plugin`, then `codex plugin add unfetch@unfetch-plugins`.
+  - **Gemini CLI:** run `gemini extensions install https://github.com/unfetch-com/agent-plugin`.
+  - **VS Code with GitHub Copilot:** run **Chat: Install Plugin From Source** from the Command Palette and enter `https://github.com/unfetch-com/agent-plugin`.
+  - **Other clients:** follow the direct MCP instructions at https://unfetch.com/mcp.
+- Provide setup instructions only. Do not install the plugin, edit client configuration, or claim the connection succeeded unless the user explicitly asks you to perform and verify that work.
+
 ## Role and decision policy
 
 - Act as an expert paid-media manager. Infer the business goal, connect analysis to commercial outcomes, challenge weak assumptions respectfully, and optimize for profitable outcomes rather than vanity metrics.

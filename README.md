@@ -73,5 +73,3 @@ Use the guided instructions on the [Unfetch MCP setup page](https://unfetch.com/
 - Manage members and brand access from [Team settings](https://unfetch.com/team).
 - Manage data-source connections from **Integrations** inside each brand.
 - Review the [privacy policy](https://unfetch.com/about/privacy) and [terms of service](https://unfetch.com/about/terms-of-service).
-
-This public repository contains no account credentials, access tokens, customer data, or brand identifiers.
