@@ -1,0 +1,8 @@
+{
+	"mcpServers": {
+		"unfetch": {
+			"type": "http",
+			"url": "https://unfetch.com/api/mcp"
+		}
+	}
+}

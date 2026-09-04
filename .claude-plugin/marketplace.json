@@ -1,0 +1,38 @@
+{
+	"name": "unfetch-plugins",
+	"owner": {
+		"name": "Unfetch",
+		"email": "support@unfetch.com",
+		"url": "https://unfetch.com"
+	},
+	"description": "Official plugins for marketing reporting with Unfetch.",
+	"plugins": [
+		{
+			"name": "unfetch",
+			"displayName": "Unfetch",
+			"source": "./agent-plugin/unfetch",
+			"description": "Marketing reporting for connected brands, with private memory for saved preferences.",
+			"version": "1.0.0",
+			"author": {
+				"name": "Unfetch",
+				"url": "https://unfetch.com"
+			},
+			"homepage": "https://unfetch.com/mcp",
+			"repository": "https://github.com/unfetch-com/agent-plugin",
+			"keywords": [
+				"marketing",
+				"reporting",
+				"google-ads",
+				"analytics",
+				"keyword-research",
+				"web-search"
+			],
+			"category": "productivity",
+			"tags": [
+				"marketing",
+				"reporting",
+				"analytics"
+			]
+		}
+	]
+}

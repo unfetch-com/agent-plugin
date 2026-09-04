@@ -1,0 +1,10 @@
+{
+	"name": "unfetch",
+	"version": "1.0.0",
+	"description": "Marketing reporting for connected brands, with private memory for saved preferences.",
+	"mcpServers": {
+		"unfetch": {
+			"httpUrl": "https://unfetch.com/api/mcp"
+		}
+	}
+}

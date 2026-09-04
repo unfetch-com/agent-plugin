@@ -1,0 +1,23 @@
+{
+	"$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+	"name": "unfetch",
+	"displayName": "Unfetch",
+	"version": "1.0.0",
+	"description": "Marketing reporting for connected brands, with private memory for saved preferences.",
+	"author": {
+		"name": "Unfetch",
+		"url": "https://unfetch.com"
+	},
+	"homepage": "https://unfetch.com/mcp",
+	"repository": "https://github.com/unfetch-com/agent-plugin",
+	"keywords": [
+		"marketing",
+		"reporting",
+		"google-ads",
+		"analytics",
+		"keyword-research",
+		"web-search"
+	],
+	"skills": "./skills/",
+	"mcpServers": "./.mcp.json"
+}
