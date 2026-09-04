@@ -65,11 +65,11 @@ You can also open **Chat: Open Customizations**, select **Plugins**, and choose 
 
 ## ChatGPT and other MCP clients
 
-Use the guided instructions on the [Unfetch MCP setup page](https://unfetch.com/mcp). It provides the production Streamable HTTP connection and handles OAuth without API keys or credentials in this repository.
+Use the guided instructions on the [Unfetch plugin setup page](https://unfetch.com/plugin). It provides the production Streamable HTTP connection and handles OAuth without API keys or credentials in this repository.
 
 ## Access and privacy
 
-- Manage or revoke connected AI clients from [MCP settings](https://unfetch.com/mcp).
+- Manage or revoke connected AI clients from [Plugin settings](https://unfetch.com/plugin).
 - Manage members and brand access from [Team settings](https://unfetch.com/team).
 - Manage data-source connections from **Integrations** inside each brand.
 - Review the [privacy policy](https://unfetch.com/about/privacy) and [terms of service](https://unfetch.com/about/terms-of-service).

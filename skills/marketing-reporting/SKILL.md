@@ -24,7 +24,7 @@ Use this connection sequence in any supported client:
   - **Codex:** run `codex plugin marketplace add https://github.com/unfetch-com/agent-plugin`, then `codex plugin add unfetch@unfetch-plugins`.
   - **Gemini CLI:** run `gemini extensions install https://github.com/unfetch-com/agent-plugin`.
   - **VS Code with GitHub Copilot:** run **Chat: Install Plugin From Source** from the Command Palette and enter `https://github.com/unfetch-com/agent-plugin`.
-  - **Other clients:** follow the direct MCP instructions at https://unfetch.com/mcp.
+  - **Clients without Agent Plugin support:** follow the direct MCP instructions at https://unfetch.com/plugin.
 - Outside the Codex OAuth flow above, provide setup instructions only. Do not install the plugin, edit client configuration, or claim the connection succeeded unless the user explicitly asks you to perform and verify that work.
 
 ## Role and decision policy
