@@ -22,6 +22,18 @@ Reporting access is read-only for connected advertising and analytics accounts. 
 
 OAuth opens automatically when a supported client connects. Access always follows your current Unfetch team membership and brand assignments.
 
+## Install in ChatGPT desktop
+
+A ChatGPT workspace admin can import Unfetch from GitHub:
+
+1. Open **Admin > Plugins** in ChatGPT desktop.
+2. Select **Add**, then **Import marketplace**.
+3. Enter `https://github.com/unfetch-com/agent-plugin` as the **Source**. Leave **Path** and **Branch, tag, or commit** empty.
+4. Import the marketplace, review Unfetch, and make it available in the workspace.
+5. Open the **Plugins** tab and install Unfetch.
+
+The installation includes the reporting skill and MCP connection. Direct GitHub marketplace imports require a ChatGPT workspace admin.
+
 ## Install in Claude Code
 
 Run these commands inside Claude Code:
@@ -63,7 +75,7 @@ Restart Gemini CLI after installation if the extension is not available in the c
 
 You can also open **Chat: Open Customizations**, select **Plugins**, and choose **Install Plugin from Source**.
 
-## ChatGPT and other MCP clients
+## ChatGPT web and other MCP clients
 
 Use the guided instructions on the [Unfetch plugin setup page](https://unfetch.com/plugin). It provides the production Streamable HTTP connection and handles OAuth without API keys or credentials in this repository.
 
