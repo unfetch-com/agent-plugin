@@ -9,15 +9,23 @@ Use this skill for marketing performance questions, audits, comparisons, and fol
 
 ## Connect Unfetch
 
-- Before starting a report, check whether the Unfetch reporting tools are available in the current session. Do not call a tool only to test whether it exists.
-- If the tools are available, continue with the user's request.
-- If the tools are unavailable, stop and explain that Unfetch must be connected. Give only the setup path relevant to the user's client:
+Use this connection sequence in any supported client:
+
+1. If the client supports plugins, verify that the [official Unfetch plugin](https://github.com/unfetch-com/agent-plugin) is installed and enabled. If it is not installed, install it; if it is disabled, enable it.
+2. Verify that the [Unfetch MCP server](https://unfetch.com/api/mcp) is installed and active. If it is not installed, install it; if it is inactive, enable it.
+3. Verify authentication and start the Unfetch OAuth flow when authentication is missing or cannot be confirmed.
+
+- Before starting a report, check whether the Unfetch reporting tools are available in the current session. Do not call a reporting tool only to test whether it exists. If the tools are available, continue with the user's request.
+- If the tools are unavailable, diagnose the connection once. Never infer that the plugin is missing solely from an empty current-session tool inventory, and never repeat installation or authentication in the same response.
+- In Codex, run `codex plugin list` and confirm that `unfetch@unfetch-plugins` is installed and enabled. If it is, run `codex mcp list --json`, inspect the complete MCP list, and confirm that `unfetch` is enabled with URL `https://unfetch.com/api/mcp`.
+- If the Codex plugin is installed and the Unfetch MCP server is enabled but its authentication is missing, failed, or `unknown`, run `codex mcp login unfetch` once to start OAuth. Treat authentication as successful only when the command reports `Successfully logged in to MCP server 'unfetch'.` Do not inspect credential files or tokens. After a successful login, explain that the current task's tool inventory cannot refresh in place and ask the user to start a new Codex task; do not retry OAuth or installation in the current task.
+- If the plugin or MCP server is absent, give only the setup path relevant to the user's client:
   - **Claude Code:** run `/plugin marketplace add unfetch-com/agent-plugin`, then `/plugin install unfetch@unfetch-plugins`.
   - **Codex:** run `codex plugin marketplace add https://github.com/unfetch-com/agent-plugin`, then `codex plugin add unfetch@unfetch-plugins`.
   - **Gemini CLI:** run `gemini extensions install https://github.com/unfetch-com/agent-plugin`.
   - **VS Code with GitHub Copilot:** run **Chat: Install Plugin From Source** from the Command Palette and enter `https://github.com/unfetch-com/agent-plugin`.
   - **Other clients:** follow the direct MCP instructions at https://unfetch.com/mcp.
-- Provide setup instructions only. Do not install the plugin, edit client configuration, or claim the connection succeeded unless the user explicitly asks you to perform and verify that work.
+- Outside the Codex OAuth flow above, provide setup instructions only. Do not install the plugin, edit client configuration, or claim the connection succeeded unless the user explicitly asks you to perform and verify that work.
 
 ## Role and decision policy
 
