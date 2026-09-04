@@ -20,8 +20,8 @@
 	"mcpServers": "./.mcp.json",
 	"interface": {
 		"displayName": "Unfetch",
-		"shortDescription": "Marketing reporting with private saved preferences.",
-		"longDescription": "Analyze Google Ads, Google Analytics, Search Console, keyword research, and public web evidence across the brands you can access. Reporting cannot change connected provider accounts; personal memory tools can save or delete your private reporting preferences.",
+		"shortDescription": "Query Google Ads, Google Analytics and Search Console data",
+		"longDescription": "Analyze Google Ads, Google Analytics, Search Console, keyword research, and public web evidence across your brands",
 		"developerName": "Unfetch",
 		"category": "Productivity",
 		"capabilities": [
@@ -31,10 +31,12 @@
 		"privacyPolicyURL": "https://unfetch.com/about/privacy",
 		"termsOfServiceURL": "https://unfetch.com/about/terms-of-service",
 		"defaultPrompt": [
-			"Summarize performance across my connected channels.",
-			"Scan my site for keyword opportunities and estimate their demand.",
-			"Compare paid search performance with organic search."
+			"How many sessions I had last week on Google Analytics?",
+			"What keywords cost the most without bringing conversions on Google Ads?",
+			"Look for keywords which perform well organically but we are not targeting on Google Ads"
 		],
-		"brandColor": "#111827"
+		"brandColor": "#111827",
+		"composerIcon": "./assets/logo.png",
+		"logo": "./assets/logo.png"
 	}
 }
