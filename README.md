@@ -81,7 +81,7 @@ Use the guided instructions on the [Unfetch plugin setup page](https://unfetch.c
 
 ## Access and privacy
 
-- Manage or revoke connected AI clients from [Plugin settings](https://unfetch.com/plugin).
+- Manage or revoke connected AI clients from [AI client settings](https://unfetch.com/ai-clients).
 - Manage members and brand access from [Team settings](https://unfetch.com/team).
 - Manage data-source connections from **Integrations** inside each brand.
 - Review the [privacy policy](https://unfetch.com/about/privacy) and [terms of service](https://unfetch.com/about/terms-of-service).
