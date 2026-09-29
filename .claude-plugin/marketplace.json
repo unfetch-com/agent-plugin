@@ -12,13 +12,14 @@
 			"displayName": "Unfetch",
 			"source": "./agent-plugin/unfetch",
 			"description": "Marketing reporting for connected brands, with private memory for saved preferences.",
-			"version": "1.0.1",
+			"version": "1.0.2",
 			"author": {
 				"name": "Unfetch",
 				"url": "https://unfetch.com"
 			},
 			"homepage": "https://unfetch.com/plugin",
 			"repository": "https://github.com/unfetch-com/agent-plugin",
+			"license": "Apache-2.0",
 			"keywords": [
 				"marketing",
 				"reporting",

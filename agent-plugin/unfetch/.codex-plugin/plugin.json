@@ -1,6 +1,6 @@
 {
 	"name": "unfetch",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "Marketing reporting for connected brands, with private memory for saved preferences.",
 	"author": {
 		"name": "Unfetch",
@@ -8,6 +8,7 @@
 	},
 	"homepage": "https://unfetch.com/plugin",
 	"repository": "https://github.com/unfetch-com/agent-plugin",
+	"license": "Apache-2.0",
 	"keywords": [
 		"marketing",
 		"reporting",

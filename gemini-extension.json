@@ -1,6 +1,6 @@
 {
 	"name": "unfetch",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "Marketing reporting for connected brands, with private memory for saved preferences.",
 	"mcpServers": {
 		"unfetch": {
