@@ -16,7 +16,9 @@ Use this connection sequence in any supported client:
 3. Verify authentication and start the Unfetch OAuth flow when authentication is missing or cannot be confirmed.
 
 - Before starting a report, check whether the Unfetch reporting tools are available in the current session. Do not call a reporting tool only to test whether it exists. If the tools are available, continue with the user's request.
-- If the tools are unavailable, diagnose the connection once. Never infer that the plugin is missing solely from an empty current-session tool inventory, and never repeat installation or authentication in the same response.
+- If the tools are unavailable, the Unfetch MCP server is not connected yet. Give only the connection instructions relevant to the user's client, and never repeat them in the same response:
+  - **Claude:** open https://unfetch.com/plugin/claude/connect, click **Connect**, and complete the OAuth flow.
+  - **Other clients:** open the client's MCP settings, connect to `https://unfetch.com/api/mcp`, and complete the OAuth flow.
 - In Codex, run `codex plugin list` and confirm that `unfetch@unfetch-plugins` is installed and enabled. If it is, run `codex mcp list --json`, inspect the complete MCP list, and confirm that `unfetch` is enabled with URL `https://unfetch.com/api/mcp`.
 - If the Codex plugin is installed and the Unfetch MCP server is enabled but its authentication is missing, failed, or `unknown`, run `codex mcp login unfetch` once to start OAuth. Treat authentication as successful only when the command reports `Successfully logged in to MCP server 'unfetch'.` Do not inspect credential files or tokens. After a successful login, explain that the current task's tool inventory cannot refresh in place and ask the user to start a new Codex task; do not retry OAuth or installation in the current task.
 - If the plugin or MCP server is absent, give only the setup path relevant to the user's client:
