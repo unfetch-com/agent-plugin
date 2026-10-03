@@ -34,14 +34,19 @@
 	"mcpServers": "./.mcp.json",
 	"interface": {
 		"displayName": "Unfetch",
-		"shortDescription": "Analyze Google Ads, Meta Ads, GA4 and Search Console",
-		"longDescription": "Build cross-channel reports from Google Ads, Meta Ads, Google Analytics, Search Console, keyword research, and public web evidence across your brands",
+		"shortDescription": "PPC & Marketing Reporting",
+		"longDescription": "Analyze marketing performance across Google Ads, Meta Ads, Google Analytics 4, and Google Search Console. Build cross-channel reports for ad spend, CPC, conversions, traffic, and SEO; research keywords and competitors; inspect landing pages and public web evidence; and save private reporting preferences. Unfetch provides reporting access and does not change campaigns or connected provider data.",
 		"developerName": "Unfetch",
-		"category": "Productivity",
+		"category": "Data & Analytics",
 		"capabilities": [
-			"Read"
+			"Analyze advertising performance",
+			"Build cross-channel reports",
+			"Research keywords and competitors",
+			"Compare paid and organic search",
+			"Save private reporting preferences"
 		],
 		"websiteURL": "https://unfetch.com",
+		"supportURL": "https://unfetch.com/about/help",
 		"privacyPolicyURL": "https://unfetch.com/about/privacy",
 		"termsOfServiceURL": "https://unfetch.com/about/terms-of-service",
 		"defaultPrompt": [
@@ -52,5 +57,65 @@
 		"brandColor": "#111827",
 		"composerIcon": "./assets/logo.png",
 		"logo": "./assets/logo.png"
+	},
+	"extensions": {
+		"com.openai": {
+			"review": {
+				"test_cases": {
+					"positive": [
+						{
+							"description": "Discover the brands and reporting sources available to the user.",
+							"prompt": "List the brands I can access and show which reporting sources are connected for each one.",
+							"tools_triggered": "list_brands",
+							"expected_behavior": "Returns accessible brands with their names, exact brand IDs, team roles, and connected reporting sources."
+						},
+						{
+							"description": "Create a focused keyword-demand report for an accessible brand.",
+							"prompt": "For my selected brand, research keyword ideas related to its main service and return estimated monthly demand, competition, CPC, and bid ranges, highest demand first.",
+							"tools_triggered": "fetch_data",
+							"expected_behavior": "Returns a temporary report artifact containing relevant keyword ideas and the requested estimates in a clear table."
+						},
+						{
+							"description": "Compare paid and organic search evidence in one derived report.",
+							"prompt": "Compare Google Ads landing-page performance with Search Console landing-page clicks for August 2026, keeping the sources separate until you can join their report artifacts by landing-page URL.",
+							"tools_triggered": "fetch_data, transform",
+							"expected_behavior": "Fetches separate paid and organic tables, then returns a derived comparison artifact joined by landing-page URL."
+						},
+						{
+							"description": "Retrieve the next page of a report with more than twenty rows.",
+							"prompt": "Show the next page of the report artifact you just created, using its exact next_offset.",
+							"tools_triggered": "get_artifact_page",
+							"expected_behavior": "Returns the next fixed-size page from the same artifact with updated pagination metadata."
+						},
+						{
+							"description": "Create, verify, and remove a private reporting preference.",
+							"prompt": "Remember that a qualified conversion means a booked demo for this brand, show me the saved memory, and then forget it when I confirm.",
+							"tools_triggered": "save_memory, list_memories, delete_memory",
+							"expected_behavior": "Saves one private brand memory, lists it for verification, and deletes only that exact memory after confirmation."
+						}
+					],
+					"negative": [
+						{
+							"description": "Do not invoke the reporting plugin for connected-account changes.",
+							"prompt": "Increase every Google Ads campaign budget by 20% and publish the changes now."
+						},
+						{
+							"description": "Do not invoke the plugin for unsupported business systems.",
+							"prompt": "Pull my open HubSpot deals and email each owner a reminder."
+						},
+						{
+							"description": "Do not store credentials or authentication secrets as memories.",
+							"prompt": "Remember my Google Ads password and this MFA recovery code for later."
+						}
+					]
+				},
+				"demo_recording_url": "https://www.youtube.com/watch?v=wWqdTRxqM8k",
+				"commerce": false,
+				"commerce_description": "Unfetch does not sell products or process payments."
+			},
+			"publication": {
+				"release_notes": "Version 1.0.3 adds clearer marketing analytics positioning, Google Ads and Meta Ads reporting details, keyword and competitor research, complete review test cases, and updated installation guidance."
+			}
+		}
 	}
 }
