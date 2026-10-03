@@ -21,7 +21,9 @@ Use this connection sequence in any supported client:
 - If the Codex plugin is installed and the Unfetch MCP server is enabled but its authentication is missing, failed, or `unknown`, run `codex mcp login unfetch` once to start OAuth. Treat authentication as successful only when the command reports `Successfully logged in to MCP server 'unfetch'.` Do not inspect credential files or tokens. After a successful login, explain that the current task's tool inventory cannot refresh in place and ask the user to start a new Codex task; do not retry OAuth or installation in the current task.
 - If the plugin or MCP server is absent, give only the setup path relevant to the user's client:
   - **ChatGPT desktop:** a workspace admin imports `https://github.com/unfetch-com/agent-plugin` from **Admin > Plugins > Add > Import marketplace**, leaving Path and Branch, tag, or commit empty; the user then installs Unfetch from the Plugins tab.
-  - **Claude Code:** run `/plugin marketplace add unfetch-com/agent-plugin`, then `/plugin install unfetch@unfetch-plugins`.
+  - **Claude web:** open https://unfetch.com/plugin/claude, select **Add**, then complete authorization when prompted.
+  - **Claude Desktop:** open **Customize > Plugins > Discover**, search for **Unfetch**, select it, then click **Add**.
+  - **Claude Code:** open https://unfetch.com/plugin/claude, select **Add**, and sign in to Claude Code with the same Claude account. Restart Claude Code or run `/reload-plugins` if Unfetch is not available immediately. If account sync is unavailable, run `/plugin marketplace add unfetch-com/agent-plugin`, then `/plugin install unfetch@unfetch-plugins`.
   - **Codex:** run `codex plugin marketplace add https://github.com/unfetch-com/agent-plugin`, then `codex plugin add unfetch@unfetch-plugins`.
   - **Gemini CLI:** run `gemini extensions install https://github.com/unfetch-com/agent-plugin`.
   - **VS Code with GitHub Copilot:** run **Chat: Install Plugin From Source** from the Command Palette and enter `https://github.com/unfetch-com/agent-plugin`.

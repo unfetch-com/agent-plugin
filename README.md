@@ -5,6 +5,7 @@ Connect your AI assistant to your marketing data and turn live account evidence 
 Unfetch supports:
 
 - Google Ads campaign, keyword, search-term, conversion, budget, and performance reporting
+- Meta Ads campaign, ad set, ad, placement, spend, conversion, and performance reporting across Facebook, Instagram, and Messenger
 - Google Analytics traffic and conversion reporting
 - Google Search Console query and landing-page reporting
 - Keyword research, including demand, competition, CPC, and bid estimates
@@ -34,16 +35,20 @@ A ChatGPT workspace admin can import Unfetch from GitHub:
 
 The installation includes the reporting skill and MCP connection. Direct GitHub marketplace imports require a ChatGPT workspace admin.
 
-## Install in Claude Code
+## Install in Claude
 
-Run these commands inside Claude Code:
+Add Unfetch once to your Claude account:
+
+- **Claude web:** open [Unfetch in Claude's plugin directory](https://unfetch.com/plugin/claude), select **Add**, then complete authorization when prompted.
+- **Claude Desktop:** open **Customize > Plugins > Discover**, search for **Unfetch**, select it, then click **Add**.
+- **Claude Code:** sign in with the same Claude account. Restart Claude Code or run `/reload-plugins` if Unfetch is not available immediately.
+
+If account sync is unavailable, install directly from GitHub by running these commands inside Claude Code:
 
 ```text
 /plugin marketplace add unfetch-com/agent-plugin
 /plugin install unfetch@unfetch-plugins
 ```
-
-Restart Claude Code or run `/reload-plugins` if the plugin is not available immediately.
 
 ## Install in Codex
 
