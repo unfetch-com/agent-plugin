@@ -12,7 +12,7 @@
 			"displayName": "Unfetch",
 			"source": "./agent-plugin/unfetch",
 			"description": "Connect your AI assistant to Google Ads, Meta Ads for Facebook, Instagram, and Messenger, Google Analytics 4 (GA4), and Google Search Console. Build cross-channel marketing reports and analyze PPC campaigns, ad spend, CPC, conversions, traffic, and SEO. Run keyword research, competitor analysis, landing-page analysis, and web research across connected brands. Includes private memory for reporting preferences.",
-			"version": "1.0.3",
+			"version": "1.0.4",
 			"author": {
 				"name": "Unfetch",
 				"url": "https://unfetch.com"

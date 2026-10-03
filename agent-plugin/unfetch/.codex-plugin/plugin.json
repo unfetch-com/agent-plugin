@@ -1,6 +1,6 @@
 {
 	"name": "unfetch",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"description": "Connect your AI assistant to Google Ads, Meta Ads for Facebook, Instagram, and Messenger, Google Analytics 4 (GA4), and Google Search Console. Build cross-channel marketing reports and analyze PPC campaigns, ad spend, CPC, conversions, traffic, and SEO. Run keyword research, competitor analysis, landing-page analysis, and web research across connected brands. Includes private memory for reporting preferences.",
 	"author": {
 		"name": "Unfetch",
@@ -114,7 +114,7 @@
 				"commerce_description": "Unfetch does not sell products or process payments."
 			},
 			"publication": {
-				"release_notes": "Version 1.0.3 adds clearer marketing analytics positioning, Google Ads and Meta Ads reporting details, keyword and competitor research, complete review test cases, and updated installation guidance."
+				"release_notes": "Version 1.0.4 adds explicit MCP connection and OAuth instructions for Claude web, Claude Desktop, Claude Code, and other supported clients."
 			}
 		}
 	}
