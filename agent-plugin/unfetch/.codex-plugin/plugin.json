@@ -1,7 +1,7 @@
 {
 	"name": "unfetch",
-	"version": "1.0.4",
-	"description": "Connect your AI assistant to Google Ads, Meta Ads for Facebook, Instagram, and Messenger, Google Analytics 4 (GA4), and Google Search Console. Build cross-channel marketing reports and analyze PPC campaigns, ad spend, CPC, conversions, traffic, and SEO. Run keyword research, competitor analysis, landing-page analysis, and web research across connected brands. Includes private memory for reporting preferences.",
+	"version": "1.0.5",
+	"description": "Connect your AI assistant to Google Ads, Meta Ads for Facebook, Instagram, and Messenger, Google Analytics 4 (GA4), Google Search Console, and Google Merchant Center. Build cross-channel marketing reports and analyze PPC campaigns, ad spend, CPC, conversions, traffic, SEO, and Shopping product performance. Run keyword research, competitor analysis, landing-page analysis, and web research across connected brands. Includes private memory for reporting preferences, and can propose account changes for your approval when you allow it.",
 	"author": {
 		"name": "Unfetch",
 		"url": "https://unfetch.com"
@@ -24,6 +24,8 @@
 		"ga4",
 		"google-search-console",
 		"seo",
+		"google-merchant-center",
+		"google-shopping",
 		"keyword-research",
 		"competitor-analysis",
 		"competitor-research",
@@ -35,7 +37,7 @@
 	"interface": {
 		"displayName": "Unfetch",
 		"shortDescription": "PPC & Marketing Reporting",
-		"longDescription": "Analyze marketing performance across Google Ads, Meta Ads, Google Analytics 4, and Google Search Console. Build cross-channel reports for ad spend, CPC, conversions, traffic, and SEO; research keywords and competitors; inspect landing pages and public web evidence; and save private reporting preferences. Access is read-only by default; account changes happen only after you allow them for the AI client in Unfetch.",
+		"longDescription": "Analyze marketing performance across Google Ads, Meta Ads, Google Analytics 4, Google Search Console, and Google Merchant Center. Build cross-channel reports for ad spend, CPC, conversions, traffic, SEO, and Shopping products; research keywords and competitors; inspect landing pages and public web evidence; and save private reporting preferences. Access is read-only by default; account changes happen only after you allow them for the AI client in Unfetch.",
 		"developerName": "Unfetch",
 		"category": "Data & Analytics",
 		"capabilities": [
@@ -43,6 +45,7 @@
 			"Build cross-channel reports",
 			"Research keywords and competitors",
 			"Compare paid and organic search",
+			"Diagnose Merchant Center products and pricing",
 			"Save private reporting preferences"
 		],
 		"websiteURL": "https://unfetch.com",
@@ -82,10 +85,10 @@
 							"expected_behavior": "Fetches separate paid and organic tables, then returns a derived comparison artifact joined by landing-page URL."
 						},
 						{
-							"description": "Retrieve the next page of a report with more than twenty rows.",
-							"prompt": "Show the next page of the report artifact you just created, using its exact next_offset.",
-							"tools_triggered": "get_artifact_page",
-							"expected_behavior": "Returns the next fixed-size page from the same artifact with updated pagination metadata."
+							"description": "Find Merchant Center product issues that limit Shopping visibility.",
+							"prompt": "Which of my products have disapproval issues in Merchant Center, most valuable first?",
+							"tools_triggered": "fetch_data",
+							"expected_behavior": "Returns a report artifact with one row per product issue, ordered by click potential, including each product's status and the affected attributes."
 						},
 						{
 							"description": "Create, verify, and remove a private reporting preference.",
@@ -96,8 +99,8 @@
 					],
 					"negative": [
 						{
-							"description": "Do not invoke the reporting plugin for connected-account changes.",
-							"prompt": "Increase every Google Ads campaign budget by 20% and publish the changes now."
+							"description": "Do not invoke the plugin for general marketing copywriting.",
+							"prompt": "Write a LinkedIn post announcing our team offsite."
 						},
 						{
 							"description": "Do not invoke the plugin for unsupported business systems.",
@@ -114,7 +117,7 @@
 				"commerce_description": "Unfetch does not sell products or process payments."
 			},
 			"publication": {
-				"release_notes": "Version 1.0.4 adds explicit MCP connection and OAuth instructions for Claude web, Claude Desktop, Claude Code, and other supported clients."
+				"release_notes": "Version 1.0.5 adds Google Merchant Center reporting and lets you allow an AI client to propose account changes for your approval, or apply them directly, from AI client settings in Unfetch. Access stays read-only by default."
 			}
 		}
 	}

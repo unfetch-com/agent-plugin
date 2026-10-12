@@ -8,12 +8,13 @@ Unfetch supports:
 - Meta Ads campaign, ad set, ad, placement, spend, conversion, and performance reporting across Facebook, Instagram, and Messenger
 - Google Analytics traffic and conversion reporting
 - Google Search Console query and landing-page reporting
+- Google Merchant Center product and account issues, free-listing and Shopping product performance, price benchmarks and suggestions, best sellers, and Shopping competitor visibility
 - Keyword research, including demand, competition, CPC, and bid estimates
 - Web research for current public-page and landing-page evidence
 - Follow-up analysis across report results
 - Private memories for reporting preferences and business context
 
-Access is read-only by default: a newly connected AI client cannot change campaigns, budgets, bids, ads, analytics properties, or Search Console data. In [AI client settings](https://unfetch.com/ai-clients) you can allow a client to propose account changes, which you approve or reject in Unfetch, or to apply changes directly. Account changes also require admin access to the brand and a paid plan. Personal memory tools can save or delete private reporting preferences in your Unfetch account.
+Access is read-only by default: a newly connected AI client cannot change campaigns, budgets, bids, ads, analytics properties, Search Console data, or Merchant Center products. In [AI client settings](https://unfetch.com/ai-clients) you can allow a client to propose account changes, which you approve or reject in Unfetch, or to apply changes directly. Account changes also require admin access to the brand and a paid plan. Personal memory tools can save or delete private reporting preferences in your Unfetch account.
 
 ## Before you install
 
