@@ -35,7 +35,7 @@
 	"interface": {
 		"displayName": "Unfetch",
 		"shortDescription": "PPC & Marketing Reporting",
-		"longDescription": "Analyze marketing performance across Google Ads, Meta Ads, Google Analytics 4, and Google Search Console. Build cross-channel reports for ad spend, CPC, conversions, traffic, and SEO; research keywords and competitors; inspect landing pages and public web evidence; and save private reporting preferences. Unfetch provides reporting access and does not change campaigns or connected provider data.",
+		"longDescription": "Analyze marketing performance across Google Ads, Meta Ads, Google Analytics 4, and Google Search Console. Build cross-channel reports for ad spend, CPC, conversions, traffic, and SEO; research keywords and competitors; inspect landing pages and public web evidence; and save private reporting preferences. Access is read-only by default; account changes happen only after you allow them for the AI client in Unfetch.",
 		"developerName": "Unfetch",
 		"category": "Data & Analytics",
 		"capabilities": [

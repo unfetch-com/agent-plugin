@@ -13,7 +13,7 @@ Unfetch supports:
 - Follow-up analysis across report results
 - Private memories for reporting preferences and business context
 
-Reporting access is read-only for connected advertising and analytics accounts. The plugin cannot change campaigns, budgets, bids, ads, analytics properties, or Search Console data. Personal memory tools can save or delete private reporting preferences in your Unfetch account.
+Access is read-only by default: a newly connected AI client cannot change campaigns, budgets, bids, ads, analytics properties, or Search Console data. In [AI client settings](https://unfetch.com/ai-clients) you can allow a client to propose account changes, which you approve or reject in Unfetch, or to apply changes directly. Account changes also require admin access to the brand and a paid plan. Personal memory tools can save or delete private reporting preferences in your Unfetch account.
 
 ## Before you install
 
@@ -86,7 +86,7 @@ Use the guided instructions on the [Unfetch plugin setup page](https://unfetch.c
 
 ## Access and privacy
 
-- Manage or revoke connected AI clients from [AI client settings](https://unfetch.com/ai-clients).
+- Manage, limit, or revoke connected AI clients and their account access from [AI client settings](https://unfetch.com/ai-clients).
 - Manage members and brand access from [Team settings](https://unfetch.com/team).
 - Manage data-source connections from **Integrations** inside each brand.
 - Review the [privacy policy](https://unfetch.com/about/privacy) and [terms of service](https://unfetch.com/about/terms-of-service).
