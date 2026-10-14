@@ -1,0 +1,24 @@
+{
+	"$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+	"name": "com.unfetch/unfetch",
+	"title": "Unfetch",
+	"description": "Marketing reporting across Google Ads, Meta Ads, GA4, Search Console and Merchant Center.",
+	"version": "1.0.6",
+	"websiteUrl": "https://unfetch.com/plugin",
+	"repository": {
+		"url": "https://github.com/unfetch-com/agent-plugin",
+		"source": "github"
+	},
+	"icons": [
+		{
+			"src": "https://unfetch.com/logos/logo_round_black.png",
+			"mimeType": "image/png"
+		}
+	],
+	"remotes": [
+		{
+			"type": "streamable-http",
+			"url": "https://unfetch.com/api/mcp"
+		}
+	]
+}
