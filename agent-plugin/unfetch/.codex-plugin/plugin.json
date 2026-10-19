@@ -1,6 +1,6 @@
 {
 	"name": "unfetch",
-	"version": "1.0.6",
+	"version": "1.1.0",
 	"description": "Connect your AI assistant to Google Ads, Meta Ads for Facebook, Instagram, and Messenger, Google Analytics 4 (GA4), Google Search Console, and Google Merchant Center. Build cross-channel marketing reports and analyze PPC campaigns, ad spend, CPC, conversions, traffic, SEO, and Shopping product performance. Run keyword research, competitor analysis, landing-page analysis, and web research across connected brands. Includes private memory for reporting preferences, and can propose account changes for your approval when you allow it.",
 	"author": {
 		"name": "Unfetch",
@@ -75,19 +75,19 @@
 						{
 							"description": "Create a focused keyword-demand report for an accessible brand.",
 							"prompt": "For my selected brand, research keyword ideas related to its main service and return estimated monthly demand, competition, CPC, and bid ranges, highest demand first.",
-							"tools_triggered": "fetch_data",
+							"tools_triggered": "search_actions, execute_read_action",
 							"expected_behavior": "Returns a temporary report artifact containing relevant keyword ideas and the requested estimates in a clear table."
 						},
 						{
 							"description": "Compare paid and organic search evidence in one derived report.",
 							"prompt": "Compare Google Ads landing-page performance with Search Console landing-page clicks for August 2026, keeping the sources separate until you can join their report artifacts by landing-page URL.",
-							"tools_triggered": "fetch_data, transform",
-							"expected_behavior": "Fetches separate paid and organic tables, then returns a derived comparison artifact joined by landing-page URL."
+							"tools_triggered": "search_actions, execute_read_action, transform",
+							"expected_behavior": "Reads separate paid and organic tables, then returns a derived comparison artifact joined by landing-page URL."
 						},
 						{
 							"description": "Find Merchant Center product issues that limit Shopping visibility.",
 							"prompt": "Which of my products have disapproval issues in Merchant Center, most valuable first?",
-							"tools_triggered": "fetch_data",
+							"tools_triggered": "search_actions, execute_read_action",
 							"expected_behavior": "Returns a report artifact with one row per product issue, ordered by click potential, including each product's status and the affected attributes."
 						},
 						{
@@ -117,7 +117,7 @@
 				"commerce_description": "Unfetch does not sell products or process payments."
 			},
 			"publication": {
-				"release_notes": "Version 1.0.6 adds interactive views: dashboards, linked tables and charts, row selections and editable drafts rendered directly in supported AI clients."
+				"release_notes": "Version 1.1.0 reads marketing data through ready-made Google Ads, Google Analytics and Search Console reports, including period comparisons, adds Search Console sitemap and URL index checks, and lets the assistant send feedback to Unfetch."
 			}
 		}
 	}

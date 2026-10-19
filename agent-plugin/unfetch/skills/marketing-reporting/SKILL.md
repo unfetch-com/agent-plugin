@@ -42,30 +42,43 @@ Use this connection sequence in any supported client:
 
 ### Keyword and paid-search research
 
-- Before any keyword-research fetch, get both the target market and language from the current request or a durable brand memory. If either is unknown, ask exactly one focused question: “What target market and language should I use?” Never infer them from the domain, brand, location, spelling, currency, or earlier tool results.
+- Before any keyword-research read, get both the target market and language from the current request or a durable brand memory. If either is unknown, ask exactly one focused question: “What target market and language should I use?” Never infer them from the domain, brand, location, spelling, currency, or earlier tool results.
 - When the user confirms that the market and language should be the brand's default, save one consolidated memory such as `Default keyword-research market and language: United States, English.` Do not save a one-off research scope as a default. Before saving, list memories; delete any overlapping market/language default, then save the new consolidated value so future research has one authoritative default.
 - Use `web.scrape_page` only when page text is necessary evidence for the requested conclusion, such as deriving a curated seed set from an offer or judging landing-page fit. Inspect the smallest useful page set, and use `web.map_site` only when the relevant URLs are unknown. Scraped Markdown is textual evidence, not visual evidence; do not claim hierarchy, prominence, layout, or mobile quality unless the client supplies inspectable image evidence.
 - Keep derived seed sets small and explicit, with branded, category, problem, feature, use-case, competitor, and high-intent commercial themes distinguishable.
-- Choose the narrowest keyword action: `site_keywords` for domain-led breadth; `keyword_suggestions` for long-tail phrases containing one seed; `keyword_ideas` for broader category expansion; `metrics` for an exact curated set; `history` for monthly seasonality or trends; `paid_ranked_keywords` for observed paid ads and landing pages; `organic_ranked_keywords` for observed organic rankings; `paid_competitors` for paid-search overlap; and `live_serp` for one current results-page check.
+- Choose the narrowest keyword action: `keyword_research.site_keywords` for domain-led breadth; `keyword_research.keyword_suggestions` for long-tail phrases containing one seed; `keyword_research.keyword_ideas` for broader category expansion; `keyword_research.metrics` for an exact curated set; `keyword_research.history` for monthly seasonality or trends; `keyword_research.paid_ranked_keywords` for observed paid ads and landing pages; `keyword_research.organic_ranked_keywords` for observed organic rankings; `keyword_research.paid_competitors` for paid-search overlap; and `keyword_research.live_serp` for one current results-page check.
 - Treat CPC, bid, traffic-cost, and equivalent paid-cost fields as USD unless the artifact explicitly states otherwise. Whenever reporting Google Ads competition, call it paid competition or paid-advertiser density; never describe it as organic keyword difficulty. Label inferred intent, funnel stage, landing-page fit, and recommended match type as analysis rather than provider facts.
 - When account data is available, validate research against Google Ads search terms and conversion quality. When organic opportunity matters, validate it separately against Search Console. Never present third-party keyword estimates as observed account performance.
 - Keep PPC recommendations usable by grouping supported keywords into tightly related ad groups, mapping each group to the closest existing landing page, separating negatives and exclusions, and prioritizing by commercial intent, relevance, evidence quality, and economics. State unknowns such as margin, target CPA or ROAS, conversion lag, and sales quality instead of inventing them.
 
+## Read data
+
+Every data read takes the same steps, whatever the source:
+
+1. **Search.** Call `search_actions` with the brand, one source from its `sources` in `list_brands`, `intent: "read"`, and one short sentence per table saying what it should show from the user's point of view, such as `["search terms that spent money without converting", "which campaigns are paused"]`. The sentence states the kind of outcome wanted; dates, metric lists, filters, limits, names and URLs belong in the action's body, not in the query, and one search covers every read of that kind. It returns the three best read actions per query, each with its description and exact `body_schema` with a worked example body, then the source's free-form fallback action when it has one, plus rules that apply to every action of that source. Follow those rules.
+2. **Choose and fill.** Pick the action whose description matches the evidence question, and write its body from its `body_schema`: only the fields it defines, explicit `YYYY-MM-DD` dates, only the metrics, dimensions and filters the question needs, and the smallest sufficient limit. Adapt the schema's example to the request rather than copying its dates or scope.
+3. **Read.** Call `execute_read_action` with the exact `action_id`, the body, a `title` that names the table with its dates and scope, and a short user-facing `activity` such as `Checking campaign spend last month`. Keep `brand_id`, `action_id`, `title` and `activity` at the tool's top level, never inside `body`. It returns one table artifact with its ID, columns, preview rows and total row count.
+
+- When a read is refused for an invalid body, correct exactly what the reason names and call again with the same action. Choose another action only when the reason shows this one cannot answer the question.
+- When no returned action fits, search again with different wording. Reuse an action you already found for further reads in the same conversation instead of searching again.
+- Prefer typed actions. Use a source's fallback action, a free-form query, only when no other returned action covers the request, following its body_schema rules.
+- Combine or calculate across artifacts with `transform`, and load more rows of one artifact with `get_artifact_page`. Actions found with `intent: "write"` change an account and go only through `propose_change` (see Account changes).
+
 ## Gather evidence
 
 - For a complex request, first form a short internal evidence plan. Do not narrate the plan unless the user asks for it.
-- Derive evidence questions only from the user's requested conclusions, and choose one registered action that can support each question. Treat its successful result as sufficient for the evidence its contract promises. Alternative actions, reworded requests, and subsets of inputs that the chosen action accepts together are not new evidence questions. Use additional fetches only for other requested sources, resources, grains, periods, or conclusions, and report limitations in the evidence already returned.
+- Derive evidence questions only from the user's requested conclusions, and choose one registered action that can support each question. Treat its successful result as sufficient for the evidence its contract promises. Alternative actions, reworded requests, and subsets of inputs that the chosen action accepts together are not new evidence questions. Use additional reads only for other requested sources, resources, grains, periods, or conclusions, and report limitations in the evidence already returned.
 - Break a complex audit into descriptive, evidence-specific phases. Each phase should answer one concrete question that advances the audit.
 - Run one focused phase at a time, inspect its result, and revise the next phase when the evidence changes what should be checked.
-- Make every `fetch_data` call the smallest complete unit of evidence: exactly one source, one logical resource, one reporting grain, one period, and one concrete question. A logical resource is one account object, competitor domain, site, or other independently interpretable subject. Never bundle multiple competitors, domains, resources, grains, periods, or unrelated questions into one fetch.
-- Include only the dimensions, metrics, filters, and ordering required for that one evidence question. Keep related fields together when they describe the same table; minimal scope does not mean fetching one metric or row at a time.
-- For comparisons, fetch every subject or period into its own artifact, inspect each result, then use `transform` to align and compare them. A fetch gathers evidence from one scope; it does not join sources, compare periods, or stand in for evidence about another subject.
-- For a time-period comparison, issue only the baseline fetch first; never queue the baseline and current-period fetches together. Fetch a complete baseline at the required grain without filtering to nonzero outcomes, then inspect it. If that baseline is empty, stop all reporting calls for the comparison without broadening or retrying it because the comparison cannot be supported. Otherwise fetch the current period separately, then compare the two artifacts with `transform`. Keep exactly one period in each artifact and never combine periods in one fetch.
+- Make every `execute_read_action` call the smallest complete unit of evidence: exactly one source, one logical resource, one reporting grain, one period (with its comparison period when the action accepts one), and one concrete question. A logical resource is one account object, competitor domain, site, or other independently interpretable subject. Never bundle multiple competitors, domains, resources, grains, unrelated periods, or unrelated questions into one read.
+- Include only the dimensions, metrics, filters, and ordering required for that one evidence question. Keep related fields together when they describe the same table; minimal scope does not mean reading one metric or row at a time.
+- For comparisons between subjects, read every subject into its own artifact, inspect each result, then use `transform` to align and compare them. A read gathers evidence from one scope; it does not join sources or stand in for evidence about another subject.
+- For a time-period comparison, use the chosen action's comparison period when its `body_schema` offers one: a single read then returns both periods with identical scope, and `transform` is needed only for a calculation the result does not already include. Otherwise read the complete baseline first at the required grain, without filtering to nonzero outcomes, and inspect it before reading the current period separately with identical scope; never queue the two reads together, and compare their artifacts with `transform`. Either way, when the baseline has no data, stop reading for the comparison without broadening or retrying it, because the comparison cannot be supported. Combine periods in one read only through the action's comparison period.
 - Before combining artifacts, align their date ranges, markets, channels, populations, grains, and identifiers. Do not compare a filtered population with an unfiltered one, such as organic Search Console activity with all-channel Analytics sessions.
-- Keep competitor research attributable. Fetch each competitor domain separately, fetch the selected brand's public site separately, and keep keyword research derived from different competitors in separate artifacts when the conclusion depends on who covers each theme.
+- Keep competitor research attributable. Read each competitor domain separately, read the selected brand's public site separately, and keep keyword research derived from different competitors in separate artifacts when the conclusion depends on who covers each theme.
 - Treat missing evidence narrowly. An absent query, row, or search result means it was not observed in that result; it does not prove zero activity, missing content, or a market gap. Inspect the selected brand's public pages before recommending that it create content.
-- Treat an empty artifact as evidence only for its exact scope. Make at most one follow-up fetch when it tests a materially different explanation, such as removing a filter or checking a broader period. If that artifact is also empty, stop querying that source, report the scopes checked and the missing data, and do not repeat the question with different dimensions or metrics.
-- Reuse an existing artifact instead of fetching the same evidence again. Load another artifact page only when the preview does not contain the rows needed for the answer.
+- Treat an empty artifact as evidence only for its exact scope. Make at most one follow-up read when it tests a materially different explanation, such as removing a filter or checking a broader period. If that artifact is also empty, stop querying that source, report the scopes checked and the missing data, and do not repeat the question with different dimensions or metrics.
+- Reuse an existing artifact instead of reading the same evidence again. Load another artifact page only when the preview does not contain the rows needed for the answer.
 - Begin the first useful read-only phase without announcing methodology or future steps.
 - Route users, sessions, events, and on-site behavior to `google_analytics`; route organic or unqualified search traffic, pages, queries, and rankings to `google_search_console`; route ads, spend, and campaigns to `google_ads`; route product feed and account issues, Shopping product performance, price benchmarks, best sellers, and Shopping competitors to `google_merchant_center`; route public-page coverage to `web`; and route estimated demand to `keyword_research`. Use another source only when the question or evidence requires it.
 - Use `keyword_research` for keyword ideas and estimated search demand, competition, CPC, and bid ranges. Use `google_ads` for observed account keyword and search-term delivery and performance; never present research estimates as observed account results.
@@ -80,43 +93,43 @@ Use these as decision patterns, not literal tool requests or fixed schemas. Reso
 ### "How many users did I have last week?"
 
 1. Resolve the previous complete calendar week from the current date.
-2. Fetch one aggregate Google Analytics result for that period and metric.
+2. Read one aggregate Google Analytics result for that period and metric.
 3. Answer directly. Do not transform, paginate, or query another source. An empty artifact means the evidence is unavailable, not that the value is zero.
 
 ### "How did sessions this month compare with last month?"
 
 1. Resolve equivalent complete ranges, such as this month through yesterday versus the same elapsed days of the previous month, unless the user explicitly asks for full calendar months.
-2. Fetch only the complete baseline aggregate and inspect it. Stop if it is empty.
-3. Fetch the current aggregate separately with identical scope.
-4. Transform the two artifacts to calculate absolute and percentage change. If the baseline is zero, report percentage change as unavailable rather than dividing by zero.
-5. For new or lost pages and queries, use the same sequence with a normalized set comparison and describe results as newly or no longer observed, not definitively created or lost.
+2. When the chosen action accepts a comparison period, read both ranges in one call with the earlier range as the comparison period. Otherwise read only the complete baseline aggregate first and inspect it.
+3. Stop if the baseline has no data, and say the comparison cannot be supported. Otherwise, when the periods were not read together, read the current aggregate separately with identical scope.
+4. Calculate absolute and percentage change with `transform` unless the result already includes them. If the baseline is zero, report percentage change as unavailable rather than dividing by zero.
+5. For new or lost pages and queries, compare the two periods' normalized sets and describe results as newly or no longer observed, not definitively created or lost.
 
 ### "Where do users drop off before purchase?"
 
-1. Fetch one Google Analytics event-grain artifact containing all requested funnel steps for one period and population.
+1. Read one Google Analytics event-grain artifact containing all requested funnel steps for one period and population.
 2. If steps are observed, transform that artifact once to order the steps and calculate counts and rates from a consistent user metric.
-3. If the entire requested event set is empty, make at most one unfiltered event-inventory fetch for the same scope to distinguish missing tracking from measured drop-off, then stop. Do not fetch the same funnel table twice.
+3. If the entire requested event set is empty, make at most one unfiltered event-inventory read for the same scope to distinguish missing tracking from measured drop-off, then stop. Do not read the same funnel table twice.
 4. Treat a missing event as not observed, not proof that zero users reached it.
 
 ### "What should I optimize in Google Ads this week?"
 
-1. Check conversion configuration when the analysis depends on conversions, then fetch campaign delivery and outcomes with campaign channel and subtype for one recent complete period.
+1. Check conversion configuration when the analysis depends on conversions, then read campaign delivery and outcomes with campaign channel and subtype for one recent complete period.
 2. Inspect those artifacts before drilling down. If tracking is not trustworthy, qualify outcome-based conclusions; if there is no delivery, report why and stop the performance drill-down.
-3. Otherwise fetch only the next grain supported by an observed candidate, such as search terms for a Search campaign, budget evidence for a constrained campaign, or assets for a weak ad. Inspect each result before choosing another grain.
+3. Otherwise read only the next grain supported by an observed candidate, such as search terms for a Search campaign, budget evidence for a constrained campaign, or assets for a weak ad. Inspect each result before choosing another grain.
 4. Transform primitive values to calculate CPA, ROAS, or rankings when needed. Rank supported recommendations by impact, confidence, effort, and risk, and remain read-only unless the user explicitly requests a change.
 
 ### "Which organic landing pages get clicks but poor engagement?"
 
-1. Fetch Search Console page performance first. Stop if it is empty.
-2. Fetch Analytics landing-page behavior for Organic Search over the identical dates.
+1. Read Search Console page performance first. Stop if it is empty.
+2. Read Analytics landing-page behavior for Organic Search over the identical dates.
 3. Inspect both artifacts, normalize their page identifiers, and transform them into one comparable page grain.
 4. Keep unmatched values null and label them as mapping or tracking unknowns; never equate Search Console clicks with Analytics sessions or treat a missing match as zero engagement.
 
 ### "What topics do these competitors cover that we are missing?"
 
 1. Confirm the brand domain from the user or selected brand context; never infer it from the brand name.
-2. Fetch the brand site and each competitor domain separately, inspecting each artifact before continuing. Reuse pages already returned; fetch a specific page only when a needed claim lacks support and that page is not already present.
-3. Derive a small explicit set of themes from observed public-page coverage. Fetch estimated demand only when requested, using the stated market, and fetch Search Console queries separately when organic visibility is part of the question.
+2. Read the brand site and each competitor domain separately, inspecting each artifact before continuing. Reuse pages already returned; read a specific page only when a needed claim lacks support and that page is not already present.
+3. Derive a small explicit set of themes from observed public-page coverage. Read estimated demand only when requested, using the stated market, and read Search Console queries separately when organic visibility is part of the question.
 4. Compare the inspected evidence. Claim a public content gap only after checking the brand site, and never present keyword estimates as competitor traffic.
 
 ## Evaluate paid-media evidence
@@ -124,7 +137,7 @@ Use these as decision patterns, not literal tool requests or fixed schemas. Reso
 - Identify a campaign's advertising channel type and subtype before applying tactics. Never apply a Search checklist to Performance Max, Shopping, Display, Video, Demand Gen, App, or another campaign type.
 - Account for conversion lag, attribution settings, seasonality, recent material changes, and low volume. Compare equivalent periods when a trend claim matters.
 - Never call traffic wasteful merely because it has no conversions. Judge spend relative to target CPA or ROAS, conversion lag, click volume, search intent, conversion quality, and tracking reliability.
-- To find search terms to exclude, fetch search terms with cost, clicks, CTR and conversions for one recent complete period. Narrow non-converting candidates with `transform`, read them, and judge each against its intent, the business, its offering and existing exclusions. Prefer fewer, confident recommendations with a short reason each, and check the final list against converting terms before recommending or proposing negatives.
+- To find search terms to exclude, read search terms with cost, clicks, CTR and conversions for one recent complete period. Narrow non-converting candidates with `transform`, review them, and judge each against its intent, the business, its offering and existing exclusions. Prefer fewer, confident recommendations with a short reason each, and check the final list against converting terms before recommending or proposing negatives.
 - Prefer the user's economics over universal thresholds. For consequential advice, establish the primary and qualified conversions, target CPA or ROAS, approximate conversion value or margin when relevant, lag, budget constraints, market, language, and risk tolerance.
 - Prioritize recommendations by expected impact, confidence, effort, and risk. Prefer the smallest high-impact change set and avoid changing interacting variables together unless necessary.
 
@@ -132,7 +145,7 @@ Use these as decision patterns, not literal tool requests or fixed schemas. Reso
 
 - Treat a request to review, diagnose, optimize, or create a plan as read-only. Recommend changes separately, and request an account change only when the user explicitly asks for that change.
 - Base every requested change on current account evidence from this conversation, such as the live budget or status, and state the expected effect and how to judge it.
-- Use only the change tools available in the current session and follow their rules. Without them, the connection is read-only: give the exact recommended change for the user to make, and never imply it was made. In an AI client, a brand admin on a paid plan can allow changes for that client in [AI client settings](https://unfetch.com/ai-clients).
+- Follow the account change mode the host reports for the brand and the change tools' rules. When changes are not allowed, give the exact recommended change for the user to make, never imply it was made, and pass on the reported reason and where to change it. In an AI client, a brand admin on a paid plan can allow changes for that client in [AI client settings](https://unfetch.com/ai-clients).
 - Only an applied change has changed the account. A pending proposal has changed nothing until it is approved.
 
 ## Present findings

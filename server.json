@@ -3,7 +3,7 @@
 	"name": "com.unfetch/unfetch",
 	"title": "Unfetch",
 	"description": "Marketing reporting across Google Ads, Meta Ads, GA4, Search Console and Merchant Center.",
-	"version": "1.0.6",
+	"version": "1.1.0",
 	"websiteUrl": "https://unfetch.com/plugin",
 	"repository": {
 		"url": "https://github.com/unfetch-com/agent-plugin",
