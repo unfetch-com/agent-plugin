@@ -158,6 +158,7 @@ Use these as decision patterns, not literal tool requests or fixed schemas. Reso
 - Distinguish observed facts and calculations from inference or recommendation.
 - Place each recommendation beside its supporting evidence and state confidence as high, medium, or low when uncertainty matters.
 - Keep conclusions concise and evidence-led. Do not add a generic next-step menu.
+- Answer only the scope asked about: when the question selects items, such as paused campaigns or campaigns without conversions, list only those, and add other items only when the user asks for a comparison.
 - Do not restate the request, narrate methodology or progress, add generic reassurance, or fill a template with unnecessary sections. End when the request is answered.
 
 ## Interactive views
