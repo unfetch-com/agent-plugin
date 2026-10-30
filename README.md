@@ -24,17 +24,15 @@ Access is read-only by default: a newly connected AI client cannot change campai
 
 OAuth opens automatically when a supported client connects. Access always follows your current Unfetch team membership and brand assignments.
 
-## Install in ChatGPT desktop
+## Install in ChatGPT and Codex
 
-A ChatGPT workspace admin can import Unfetch from GitHub:
+Install Unfetch once from the ChatGPT plugin directory for ChatGPT web, ChatGPT desktop and Codex:
 
-1. Open **Admin > Plugins** in ChatGPT desktop.
-2. Select **Add**, then **Import marketplace**.
-3. Enter `https://github.com/unfetch-com/agent-plugin` as the **Source**. Leave **Path** and **Branch, tag, or commit** empty.
-4. Import the marketplace, review Unfetch, and make it available in the workspace.
-5. Open the **Plugins** tab and install Unfetch.
+1. Open [Unfetch in ChatGPT's plugin directory](https://unfetch.com/plugin/chatgpt) and select the plus button to install.
+2. Connect your Unfetch account and complete authorization when prompted.
+3. Start a new chat in ChatGPT, or a new Codex session, and ask for Unfetch.
 
-The installation includes the reporting skill and MCP connection. Direct GitHub marketplace imports require a ChatGPT workspace admin.
+The installation includes the reporting skill and MCP connection.
 
 ## Install in Claude
 
@@ -50,17 +48,6 @@ If account sync is unavailable, install directly from GitHub by running these co
 /plugin marketplace add unfetch-com/agent-plugin
 /plugin install unfetch@unfetch-plugins
 ```
-
-## Install in Codex
-
-Run:
-
-```sh
-codex plugin marketplace add https://github.com/unfetch-com/agent-plugin
-codex plugin add unfetch@unfetch-plugins
-```
-
-Start a new Codex session after installation if the plugin is not available in the current session.
 
 ## Install in Gemini CLI
 
@@ -81,7 +68,7 @@ Restart Gemini CLI after installation if the extension is not available in the c
 
 You can also open **Chat: Open Customizations**, select **Plugins**, and choose **Install Plugin from Source**.
 
-## ChatGPT web and other MCP clients
+## Other MCP clients
 
 Use the guided instructions on the [Unfetch plugin setup page](https://unfetch.com/plugin). It provides the production Streamable HTTP connection and handles OAuth without API keys or credentials in this repository.
 

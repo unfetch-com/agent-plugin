@@ -11,24 +11,24 @@ Use this skill for marketing performance questions, audits, comparisons, and fol
 
 Use this connection sequence in any supported client:
 
-1. If the client supports plugins, verify that the [official Unfetch plugin](https://github.com/unfetch-com/agent-plugin) is installed and enabled. If it is not installed, install it; if it is disabled, enable it.
+1. If the client supports plugins, verify that the official Unfetch plugin is installed and enabled. If it is not installed, follow the setup path for the user's client below; if it is disabled, enable it.
 2. Verify that the [Unfetch MCP server](https://unfetch.com/api/mcp) is installed and active. If it is not installed, install it; if it is inactive, enable it.
 3. Verify authentication and start the Unfetch OAuth flow when authentication is missing or cannot be confirmed.
 
 - Before starting a report, check whether the Unfetch reporting tools are available in the current session. Do not call a reporting tool only to test whether it exists. If the tools are available, continue with the user's request.
 - If the tools are unavailable, the Unfetch MCP server is not connected yet. Give only the connection instructions relevant to the user's client, and never repeat them in the same response:
+  - **ChatGPT web or desktop:** open https://unfetch.com/plugin/chatgpt, select **Connect** on the installed Unfetch plugin, and complete the OAuth flow.
   - **Claude web or Claude Code:** open https://unfetch.com/plugin/claude/connect, click **Connect**, and complete the OAuth flow.
   - **Claude Desktop:** open **Customize > Plugins > Unfetch > Connectors**, click **Connect**, and complete the OAuth flow.
   - **Other clients:** open the client's MCP settings, connect to `https://unfetch.com/api/mcp`, and complete the OAuth flow.
 - Use `https://unfetch.com/api/mcp` by default, including in Claude, Codex and VS Code. Use `https://unfetch.com/api/mcp/compact` only for a client that loads every tool schema up front and cannot defer them.
-- In Codex, run `codex plugin list` and confirm that `unfetch@unfetch-plugins` is installed and enabled. If it is, run `codex mcp list --json`, inspect the complete MCP list, and confirm that `unfetch` is enabled with URL `https://unfetch.com/api/mcp`.
+- In Codex, run `codex plugin list` and confirm that the Unfetch plugin is installed and enabled. If it is, run `codex mcp list --json`, inspect the complete MCP list, and confirm that `unfetch` is enabled with URL `https://unfetch.com/api/mcp`.
 - If the Codex plugin is installed and the Unfetch MCP server is enabled but its authentication is missing, failed, or `unknown`, run `codex mcp login unfetch` once to start OAuth. Treat authentication as successful only when the command reports `Successfully logged in to MCP server 'unfetch'.` Do not inspect credential files or tokens. After a successful login, explain that the current task's tool inventory cannot refresh in place and ask the user to start a new Codex task; do not retry OAuth or installation in the current task.
 - If the plugin or MCP server is absent, give only the setup path relevant to the user's client:
-  - **ChatGPT desktop:** a workspace admin imports `https://github.com/unfetch-com/agent-plugin` from **Admin > Plugins > Add > Import marketplace**, leaving Path and Branch, tag, or commit empty; the user then installs Unfetch from the Plugins tab.
+  - **ChatGPT web or desktop, and Codex:** open https://unfetch.com/plugin/chatgpt, select the plus button to install, and connect your Unfetch account when prompted. Start a new chat or Codex session to use Unfetch.
   - **Claude web:** open https://unfetch.com/plugin/claude, select **Add**, then complete authorization when prompted.
   - **Claude Desktop:** open **Customize > Plugins > Discover**, search for **Unfetch**, select it, then click **Add**.
   - **Claude Code:** open https://unfetch.com/plugin/claude, select **Add**, and sign in to Claude Code with the same Claude account. Restart Claude Code or run `/reload-plugins` if Unfetch is not available immediately. If account sync is unavailable, run `/plugin marketplace add unfetch-com/agent-plugin`, then `/plugin install unfetch@unfetch-plugins`.
-  - **Codex:** run `codex plugin marketplace add https://github.com/unfetch-com/agent-plugin`, then `codex plugin add unfetch@unfetch-plugins`.
   - **Gemini CLI:** run `gemini extensions install https://github.com/unfetch-com/agent-plugin`.
   - **VS Code with GitHub Copilot:** run **Chat: Install Plugin From Source** from the Command Palette and enter `https://github.com/unfetch-com/agent-plugin`.
   - **Clients without Agent Plugin support:** follow the direct MCP instructions at https://unfetch.com/plugin.
