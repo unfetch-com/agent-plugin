@@ -66,7 +66,7 @@ Fill the action body exactly from its schema: use only defined fields, explicit 
 
 - When a read is refused for an invalid body, correct exactly what the reason names and call again with the same action. Choose another action only when the reason shows this one cannot answer the question.
 - When no returned compact action fits, search again with different wording. Reuse an action you already found for further reads in the same conversation instead of searching again.
-- Combine or calculate across artifacts with `transform`, and load more rows of one artifact with `get_artifact_page`. On the compact layout, find write actions with `intent: "write"`. Each named proposal tool takes one or more bodies of its own action type as one proposal, so different action types become separate proposals.
+- Combine or calculate across artifacts with `transform`, and load more rows of one artifact with `get_artifact_page`, setting `limit` to the rows you need (the maximum for a whole table). On the compact layout, find write actions with `intent: "write"`. Each named proposal tool takes one or more bodies of its own action type as one proposal, so different action types become separate proposals.
 
 ### Opportunities
 
