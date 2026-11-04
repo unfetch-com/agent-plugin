@@ -2,7 +2,10 @@
 	"mcpServers": {
 		"unfetch": {
 			"type": "http",
-			"url": "https://unfetch.com/api/mcp"
+			"url": "https://unfetch.com/api/mcp",
+			"headers": {
+				"Unfetch-Plugin-Version": "1.3.2"
+			}
 		}
 	}
 }
